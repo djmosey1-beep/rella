@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✏️ Change the tab title here -->
+  <title>OnCall AC Services — Wristberg Rd, Accra</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+
+    /* =============================================
+       COLORS — change any color here and it
+       updates everywhere on the site instantly
+       ============================================= */
+    :root {
+      --blue:        #1A6FB4;   /* main brand blue */
+      --blue-dark:   #135490;   /* darker blue for hover */
+      --blue-light:  #E8F3FC;   /* pale blue for backgrounds */
+      --white:       #FFFFFF;
+      --off-white:   #F5F7FA;   /* light grey sections */
+      --text-dark:   #111827;   /* headings */
+      --text-mid:    #374151;   /* body text */
+      --text-light:  #6B7280;   /* captions / labels */
+      --border:      #E5E7EB;   /* subtle borders */
+      --orange:      #F97316;   /* accent / CTA highlight */
+    }
+
+    /* =============================================
+       RESET
+       ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html   { scroll-behavior: smooth; }
+    body   { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); background: var(--white); }
+    img    { display: block; max-width: 100%; }
+    a      { color: inherit; text-decoration: none; }
+    ul     { list-style: none; }
+
+    /* =============================================
+       REUSABLE HELPERS
+       ============================================= */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Section wrapper adds top + bottom space */
+    .section {
+      padding: 80px 0;
+    }
+
+    /* Alternate sections get a light grey background */
+    .section-grey { background: var(--off-white); }
+
+    /* Small label that sits above a heading */
+    .label {
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    /* Main section headings */
+    .heading {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+
+    /* Section sub-text */
+    .subtext {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* Blue filled button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+    /* White outlined button */
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--white);
+      color: var(--white);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.12); }
+
+    /* Orange accent button (used in hero) */
+    .btn-orange {
+      background: var(--orange);
+    }
+    .btn-orange:hover { background: #ea6c0a; }
+
+    /* Simple card */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,.09);
+      transform: translateY(-3px);
+    }
+
+    /* =============================================
+       NAV
+       ============================================= */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    /* ✏️ LOGO — change text or swap for <img src="logo.png" height="36" /> */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--blue);
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    /* ✏️ Nav links are in the HTML — search "nav-link" */
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-mid);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    /* ✏️ Nav phone number */
+    .nav-phone {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 10px 18px;
+      border-radius: 8px;
+    }
+
+    /* Hide nav links on mobile; show hamburger */
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-dark); margin: 5px 0; border-radius: 2px; transition: .3s; }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-phone { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; align-items: flex-start;
+        position: absolute; top: 68px; left: 0; right: 0;
+        background: var(--white); border-bottom: 1px solid var(--border);
+        padding: 20px 24px; gap: 20px;
+      }
+    }
+
+    /* =============================================
+       HERO
+       ============================================= */
+    #hero {
+      background: linear-gradient(135deg, #0f4c81 0%, var(--blue) 60%, #1e8fd1 100%);
+      color: var(--white);
+      padding: 90px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle decorative circles */
+    #hero::before, #hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+    }
+    #hero::before { width: 500px; height: 500px; top: -150px; right: -100px; }
+    #hero::after  { width: 300px; height: 300px; bottom: -100px; left: 40%; }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ✏️ EDIT hero text in the HTML — search "hero-title" */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; flex-shrink: 0; animation: blink 1.4s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-title span { color: #7dd3fc; } /* highlight word */
+
+    .hero-sub {
+      font-size: 17px;
+      opacity: .85;
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Trust badges below CTA */
+    .hero-trust {
+      display: flex;
+      gap: 24px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      opacity: .85;
+    }
+    .trust-item span:first-child { font-size: 18px; }
+
+    /* ┌──────────────────────────────────────────────────┐
+       │ ✏️  HERO IMAGE                                   │
+       │ Replace the background-color inside .hero-img   │
+       │ with:  background-image: url('your-photo.jpg'); │
+       │ Good options: a technician working on an AC     │
+       │ unit, a clean modern room with AC, or your van. │
+       │ Recommended size: 600×480px                     │
+       └──────────────────────────────────────────────────┘ -->
+    .hero-img {
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      background-color: rgba(255,255,255,.1);  /* remove this line when you add an image */
+      background-image: url('');               /* ✏️ PASTE IMAGE PATH HERE */
+      background-size: cover;
+      background-position: center;
+      border: 3px solid rgba(255,255,255,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.4);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    /* Remove the placeholder text once you add a real image */
+    .hero-img::after {
+      content: '📸 Add your image here';
+      /* Delete this entire ::after block once you add background-image above */
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-img   { height: 240px; }
+    }
+
+    /* =============================================
+       CONTACT BANNER (under hero)
+       ============================================= */
+    .contact-bar {
+      background: var(--text-dark);
+      color: var(--white);
+      padding: 20px 24px;
+    }
+    .contact-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .contact-bar-items {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .contact-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+    }
+    .contact-bar-item .icon { font-size: 20px; }
+    .contact-bar-item strong { display: block; font-size: 13px; opacity: .6; font-weight: 500; margin-bottom: 1px; }
+    /* ✏️ Contact details are in the HTML — search "contact-bar" */
+
+    /* =============================================
+       SERVICES
+       ============================================= */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--blue-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+    .service-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .service-desc {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+    /* ✏️ Service cards are in the HTML — search "service-card" */
+
+    /* =============================================
+       WHY CHOOSE US
+       ============================================= */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    /* ┌──────────────────────────────────────────────────┐
+       │ ✏️  WHY US IMAGE                                 │
+       │ Add your image path below.                       │
+       │ Great options: technician with tools, team       │
+       │ photo, branded vehicle, or completed job.        │
+       │ Recommended size: 560×440px                      │
+       └──────────────────────────────────────────────────┘ -->
+    .why-img {
+      width: 100%;
+      height: 400px;
+      border-radius: 16px;
+      background-color: var(--blue-light);    /* remove when you add an image */
+      background-image: url('');              /* ✏️ PASTE IMAGE PATH HERE */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-light); font-size: 14px;
+    }
+    .why-img::after {
+      content: '📸 Add your image here';
+      /* Delete this block once you add background-image above */
+    }
+
+    /* Stats floating box */
+    .why-stat-box {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      background: var(--blue);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(26,111,180,.35);
+    }
+    .why-stat-num { font-size: 32px; font-weight: 800; }
+    .why-stat-lbl { font-size: 13px; opacity: .8; margin-top: 2px; }
+
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      margin-top: 28px;
+    }
+    .why-point {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .why-point-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-light);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .why-point-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .why-point-desc  { font-size: 14px; color: var(--text-light); line-height: 1.6; }
+
+    /* ✏️ Why-us bullet points are in the HTML — search "why-point" */
+
+    @media (max-width: 768px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .why-stat-box { right: 0; }
+    }
+
+    /* =============================================
+       GALLERY
+       ============================================= */
+    /* ┌──────────────────────────────────────────────────┐
+       │ ✏️  GALLERY IMAGES                               │
+       │ Each .gal-item has a background-image line.      │
+       │ Replace url('') with your photo path:            │
+       │   background-image: url('job1.jpg');             │
+       │ Recommended: before/after shots, installed       │
+       │ units, team on-site. Size: 500×380px each.       │
+       └──────────────────────────────────────────────────┘ -->
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .gal-item {
+      height: 220px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--blue-light);   /* remove when you add images */
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-light); font-size: 13px;
+    }
+    .gal-item::before {
+      content: '📸';
+      font-size: 28px;
+      /* Delete this once you have real images */
+    }
+    .gal-item:hover { transform: scale(1.02); }
+    /* ✏️ Gallery captions are in the HTML — search "gal-caption" */
+    .gal-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.65));
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 28px 14px 12px;
+    }
+
+    /* =============================================
+       TESTIMONIALS
+       ============================================= */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    /* ✏️ Testimonial cards are in the HTML — search "testi-card" */
+    .testi-stars { color: #f59e0b; font-size: 16px; margin-bottom: 12px; }
+    .testi-quote { font-size: 15px; color: var(--text-mid); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    /* ┌──────────────────────────────────────────────────┐
+       │ ✏️  TESTIMONIAL AVATAR IMAGES                    │
+       │ Replace the circle initial with a photo:         │
+       │   <img src="client.jpg" style="              │
+       │   width:44px;height:44px;border-radius:50%;      │
+       │   object-fit:cover" />                           │
+       └──────────────────────────────────────────────────┘ -->
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0; overflow: hidden;
+    }
+    .testi-name { font-weight: 700; font-size: 15px; }
+    .testi-loc  { font-size: 13px; color: var(--text-light); }
+
+    /* =============================================
+       CONTACT SECTION
+       ============================================= */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 48px;
+      align-items: start;
+    }
+
+    /* ✏️ Contact info is in the HTML — search "cinfo" */
+    .cinfo-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cinfo-item:last-child { border-bottom: none; }
+    .cinfo-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .cinfo-label { font-size: 13px; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+    .cinfo-value { font-size: 16px; font-weight: 600; color: var(--text-dark); }
+
+    /* Form */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field.full { grid-column: span 2; }
+    .form-field label { font-size: 13px; font-weight: 600; color: var(--text-mid); }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px; font-family: inherit;
+      font-size: 15px; color: var(--text-dark);
+      background: var(--white); outline: none;
+      transition: border-color .2s;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus { border-color: var(--blue); }
+    .form-field textarea { min-height: 110px; resize: vertical; }
+    .form-success { display: none; margin-top: 14px; padding: 14px; background: #d1fae5; border-radius: 8px; color: #065f46; font-weight: 600; font-size: 15px; }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-grid    { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: span 1; }
+    }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    footer {
+      background: var(--text-dark);
+      color: var(--white);
+      padding: 60px 24px 30px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    /* ✏️ Footer content is in the HTML — search "footer" */
+    .footer-logo { font-size: 20px; font-weight: 800; color: var(--white); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .footer-desc { font-size: 15px; opacity: .65; line-height: 1.7; max-width: 300px; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .5; margin-bottom: 18px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul a { font-size: 15px; opacity: .75; transition: opacity .2s; }
+    .footer-col ul a:hover { opacity: 1; }
+    .footer-bottom { max-width: 1100px; margin: 24px auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 14px; opacity: .5; }
+    .footer-socials { display: flex; gap: 16px; }
+    .footer-socials a { font-size: 22px; opacity: .6; transition: opacity .2s; }
+    .footer-socials a:hover { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* =============================================
+       ANIMATIONS (simple fade-up on scroll)
+       ============================================= */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Stagger children */
+    .fade-up:nth-child(2) { transition-delay: .1s; }
+    .fade-up:nth-child(3) { transition-delay: .2s; }
+    .fade-up:nth-child(4) { transition-delay: .3s; }
+    .fade-up:nth-child(5) { transition-delay: .4s; }
+    .fade-up:nth-child(6) { transition-delay: .5s; }
+
+    /* Emergency banner pulse */
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.7} }
+
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       NAVIGATION
+       To add a new link: copy one <li> and change
+       the href and text inside it.
+       ============================================= -->
+  <nav>
+    <div class="nav-inner">
+
+      <!-- ✏️ Change logo name or swap for <img src="logo.png" height="36" /> -->
+      <a href="#hero" class="logo">
+        <div class="logo-icon">❄️</div>
+        OnCall AC
+      </a>
+
+      <!-- ✏️ Add or remove nav links here -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- ✏️ Change phone number here -->
+      <a href="tel:024 296 0956" class="nav-phone">
+        📞 024 296 0956
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </nav>
+
+
+  <!-- =============================================
+       HERO SECTION
+       ============================================= -->
+  <section id="hero">
+    <div class="hero-inner">
+
+      <!-- Left: text -->
+      <div>
+        <!-- ✏️ Change the badge text -->
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Available 24/7 in Accra
+        </div>
+
+        <!-- ✏️ Change the main headline — keep it short and punchy -->
+        <h1 class="hero-title">
+          Stay Cool in<br><span>Accra's Heat</span>
+        </h1>
+
+        <!-- ✏️ Change the sub-text — 1 or 2 sentences max -->
+        <p class="hero-sub">
+          Fast, reliable air conditioning installation, repair, and maintenance
+          across Accra. Call us any time — we're always on call.
+        </p>
+
+        <!-- ✏️ Change button text and links -->
+        <div class="hero-actions">
+          <a href="tel:024 296 0956" class="btn btn-orange">📞 Call Now — It's Free</a>
+          <a href="#services" class="btn btn-outline">Our Services</a>
+        </div>
+
+        <!-- ✏️ Change the 3 trust badges -->
+        <div class="hero-trust">
+          <div class="trust-item"><span>✅</span> Same-Day Service</div>
+          <div class="trust-item"><span>✅</span> Licensed Technicians</div>
+          <div class="trust-item"><span>✅</span> All AC Brands</div>
+        </div>
+      </div>
+
+      <!-- Right: photo -->
+      <!-- ✏️ See CSS above (.hero-img) to add your image -->
+      <div class="hero-img"></div>
+
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       CONTACT BAR
+       ✏️ Update your real phone, email, and hours
+       ============================================= -->
+  <div class="contact-bar">
+    <div class="contact-bar-inner">
+      <div class="contact-bar-items">
+
+        <div class="contact-bar-item">
+          <span class="icon">📞</span>
+          <div>
+            <strong>Phone / WhatsApp</strong>
+            <!-- ✏️ Your phone number -->
+            024 296 0956
+          </div>
+        </div>
+
+        <div class="contact-bar-item">
+          <span class="icon">📧</span>
+          <div>
+            <strong>Email</strong>
+            <!-- ✏️ Your email address -->
+            hello@oncallac.com
+          </div>
+        </div>
+
+        <div class="contact-bar-item">
+          <span class="icon">🕐</span>
+          <div>
+            <strong>Hours</strong>
+            <!-- ✏️ Your working hours -->
+            Mon: 8am–5:30pm | Fri–Sat: 9am–7pm
+          </div>
+        </div>
+
+        <div class="contact-bar-item">
+          <span class="icon">📍</span>
+          <div>
+            <strong>Area</strong>
+            <!-- ✏️ Your service area -->
+            Wristberg Rd, Accra
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ✏️ Change button link and text -->
+      <a href="#contact" class="btn" style="white-space:nowrap">Book a Job →</a>
+    </div>
+  </div>
+
+
+  <!-- =============================================
+       SERVICES
+       ✏️ To add a service: copy one .card block
+          and change the icon, title, and description.
+       ✏️ To remove a service: delete the .card block.
+       ============================================= -->
+  <section id="services" class="section">
+    <div class="container">
+
+      <!-- ✏️ Change section label and heading -->
+      <div class="fade-up">
+        <span class="label">What We Do</span>
+        <h2 class="heading">Our AC Services</h2>
+        <p class="subtext">From installation to emergency repairs — we handle every AC job in Accra, fast.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- ✏️ SERVICE 1 — change icon, title, description -->
+        <div class="card fade-up">
+          <div class="service-icon">🔧</div>
+          <div class="service-title">AC Repair</div>
+          <p class="service-desc">
+            Not cooling? Strange noises? We diagnose and fix all AC problems quickly.
+            Same-day repairs available across Accra.
+          </p>
+        </div>
+
+        <!-- ✏️ SERVICE 2 -->
+        <div class="card fade-up">
+          <div class="service-icon">📦</div>
+          <div class="service-title">AC Installation</div>
+          <p class="service-desc">
+            Supply and professional installation of split units, window units, and
+            ducted systems for homes and offices.
+          </p>
+        </div>
+
+        <!-- ✏️ SERVICE 3 -->
+        <div class="card fade-up">
+          <div class="service-icon">🧹</div>
+          <div class="service-title">Servicing & Cleaning</div>
+          <p class="service-desc">
+            Regular maintenance keeps your AC running efficiently and lowers
+            electricity bills. We clean filters, coils, and drains.
+          </p>
+        </div>
+
+        <!-- ✏️ SERVICE 4 -->
+        <div class="card fade-up">
+          <div class="service-icon">🌡️</div>
+          <div class="service-title">Gas Recharge (Freon)</div>
+          <p class="service-desc">
+            Low on refrigerant? We refill and pressure-test your system to restore
+            full cooling power quickly.
+          </p>
+        </div>
+
+        <!-- ✏️ SERVICE 5 -->
+        <div class="card fade-up">
+          <div class="service-icon">🏢</div>
+          <div class="service-title">Commercial AC</div>
+          <p class="service-desc">
+            Office buildings, shops, restaurants, and warehouses. We handle large
+            commercial cooling systems too.
+          </p>
+        </div>
+
+        <!-- ✏️ SERVICE 6 — delete this card if you don't need 6 services -->
+        <div class="card fade-up">
+          <div class="service-icon">⚡</div>
+          <div class="service-title">Emergency Call-Out</div>
+          <p class="service-desc">
+            AC broken at midnight? We offer emergency call-out 7 days a week.
+            Extra charges may apply on public holidays.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       WHY CHOOSE US
+       ✏️ Change the bullet points and image
+       ============================================= -->
+  <section id="why-us" class="section section-grey">
+    <div class="container">
+
+      <!-- ✏️ Change label and heading -->
+      <div class="fade-up">
+        <span class="label">Why OnCall AC</span>
+        <h2 class="heading">Accra's Most Trusted<br>AC Team</h2>
+      </div>
+
+      <div class="why-grid">
+
+        <!-- Left: image -->
+        <!-- ✏️ See CSS above (.why-img) to add your photo -->
+        <div class="why-img fade-up">
+          <!-- ✏️ Change the stat number and label -->
+          <div class="why-stat-box">
+            <div class="why-stat-num">500+</div>
+            <div class="why-stat-lbl">Jobs Done in Accra</div>
+          </div>
+        </div>
+
+        <!-- Right: bullet points -->
+        <div class="fade-up">
+
+          <!-- ✏️ Change heading and paragraph -->
+          <h3 style="font-size:22px;font-weight:800;margin-bottom:10px">
+            Fast, Honest, and Affordable
+          </h3>
+          <p style="color:var(--text-light);font-size:15px;line-height:1.7;margin-bottom:4px">
+            We built OnCall AC on one simple idea: show up on time, fix it right,
+            charge a fair price. That's it. No hidden fees, no guesswork.
+          </p>
+
+          <!-- ✏️ Add or remove .why-point blocks as needed -->
+          <div class="why-points">
+
+            <div class="why-point">
+              <div class="why-point-icon">⚡</div>
+              <div>
+                <div class="why-point-title">Same-Day Response</div>
+                <p class="why-point-desc">Call before noon and we'll be there the same day in most parts of Accra.</p>
+              </div>
+            </div>
+
+            <div class="why-point">
+              <div class="why-point-icon">🎓</div>
+              <div>
+                <div class="why-point-title">Certified Technicians</div>
+                <p class="why-point-desc">All our engineers are trained and certified to work on every major AC brand.</p>
+              </div>
+            </div>
+
+            <div class="why-point">
+              <div class="why-point-icon">💳</div>
+              <div>
+                <div class="why-point-title">Transparent Pricing</div>
+                <p class="why-point-desc">We quote before we start. No surprises on the final bill — ever.</p>
+              </div>
+            </div>
+
+            <div class="why-point">
+              <div class="why-point-icon">🛡️</div>
+              <div>
+                <div class="why-point-title">Work Guaranteed</div>
+                <p class="why-point-desc">All repairs come with a 30-day workmanship guarantee for your peace of mind.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       GALLERY
+       ✏️ Add your images in the CSS or as
+          background-image on each .gal-item below.
+       ✏️ To add more photos: copy a .gal-item block.
+       ✏️ To remove a photo: delete a .gal-item block.
+       ============================================= -->
+  <section id="gallery" class="section">
+    <div class="container">
+
+      <div class="fade-up">
+        <span class="label">Our Work</span>
+        <h2 class="heading">Recent Jobs in Accra</h2>
+        <p class="subtext">A few photos from recent installations and repairs around the city.</p>
+      </div>
+
+  
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       TESTIMONIALS
+       ✏️ Change the quotes, names, and locations.
+       ✏️ To add more: copy a .card block.
+       ============================================= -->
+  <section id="testimonials" class="section section-grey">
+    <div class="container">
+
+      <div class="fade-up">
+        <span class="label">Reviews</span>
+        <h2 class="heading">What Our Customers Say</h2>
+        <p class="subtext">Real feedback from real people across Accra.</p>
+      </div>
+
+      <div class="testi-grid">
+
+        <!-- ✏️ REVIEW 1 — change stars, quote, name, location -->
+        <div class="card fade-up">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "Called them at 8pm when my AC stopped working. They arrived within
+            2 hours and fixed it the same night. Very professional service!"
+          </p>
+          <div class="testi-author">
+            <!-- ✏️ Replace "K" with <img src="photo.jpg" .../> for a real headshot -->
+            <div class="testi-avatar">K</div>
+            <div>
+              <div class="testi-name">Kwame A.</div>
+              <div class="testi-loc">East Legon, Accra</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ✏️ REVIEW 2 -->
+        <div class="card fade-up">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "Great price for the installation. The technician was clean, quick,
+            and explained everything to me. Will definitely use them again."
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar">A</div>
+            <div>
+              <div class="testi-name">Ama S.</div>
+              <div class="testi-loc">Osu, Accra</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ✏️ REVIEW 3 -->
+        <div class="card fade-up">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "We use OnCall AC for all 6 units in our office. Reliable, affordable,
+            and always on time. The best AC company in Accra."
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar">E</div>
+            <div>
+              <div class="testi-name">Efia M.</div>
+              <div class="testi-loc">Airport City, Accra</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       CONTACT SECTION
+       ✏️ Update your contact details and the
+          dropdown options in the form.
+       ============================================= -->
+  <section id="contact" class="section">
+    <div class="container">
+
+      <div class="fade-up">
+        <span class="label">Contact Us</span>
+        <h2 class="heading">Book a Job or Get a Quote</h2>
+        <p class="subtext">Fill in the form and we'll call you back within the hour, or call us directly.</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- Left: contact info -->
+        <div class="fade-up">
+
+          <!-- ✏️ Change each contact detail -->
+          <div class="cinfo-item">
+            <span class="cinfo-icon">📞</span>
+            <div>
+              <div class="cinfo-label">Phone / WhatsApp</div>
+              <div class="cinfo-value">024 296 0956</div>
+            </div>
+          </div>
+
+          <div class="cinfo-item">
+            <span class="cinfo-icon">📧</span>
+            <div>
+              <div class="cinfo-label">Email</div>
+              <div class="cinfo-value">hello@oncallac.com</div>
+            </div>
+          </div>
+
+          <div class="cinfo-item">
+            <span class="cinfo-icon">📍</span>
+            <div>
+              <div class="cinfo-label">Based In</div>
+              <div class="cinfo-value">Wristberg Rd, Accra</div>
+            </div>
+          </div>
+
+          <div class="cinfo-item">
+            <span class="cinfo-icon">🕐</span>
+            <div>
+              <div class="cinfo-label">Working Hours</div>
+              <div class="cinfo-value">Mon: 8am–5:30pm | Fri–Sat: 9am–7pm</div>
+            </div>
+          </div>
+
+          <div class="cinfo-item">
+            <span class="cinfo-icon">📡</span>
+            <div>
+              <div class="cinfo-label">Service Area</div>
+              <div class="cinfo-value">Wristberg Rd, Accra Region</div>
+            </div>
+          </div>
+
+          <!-- ✏️ Add a Google Maps embed below (optional)
+               Go to maps.google.com → Share → Embed a map
+               Paste the <iframe> code here -->
+          <!-- <iframe src="YOUR_GOOGLE_MAPS_EMBED_URL" width="100%" height="200" style="border:0;border-radius:12px;margin-top:20px" allowfullscreen></iframe> -->
+
+        </div>
+
+        <!-- Right: form -->
+        <div class="fade-up">
+          <div class="form-grid">
+
+            <div class="form-field">
+              <label for="f-name">Your Name *</label>
+              <input type="text" id="f-name" placeholder="e.g. Kwame Asante" />
+            </div>
+
+            <div class="form-field">
+              <label for="f-phone">Phone / WhatsApp *</label>
+              <input type="tel" id="f-phone" placeholder="024 296 0956" />
+            </div>
+
+            <div class="form-field">
+              <label for="f-email">Email (optional)</label>
+              <input type="email" id="f-email" placeholder="you@example.com" />
+            </div>
+
+            <div class="form-field">
+              <label for="f-area">Your Area in Accra</label>
+              <input type="text" id="f-area" placeholder="e.g. East Legon, Tema..." />
+            </div>
+
+            <!-- ✏️ Change the dropdown options to match your services -->
+            <div class="form-field full">
+              <label for="f-service">What Do You Need?</label>
+              <select id="f-service">
+                <option value="">— Select a service —</option>
+                <option>AC Repair</option>
+                <option>AC Installation</option>
+                <option>Servicing & Cleaning</option>
+                <option>Gas Recharge (Freon)</option>
+                <option>Commercial AC</option>
+                <option>Emergency Call-Out</option>
+                <option>Not sure — please advise</option>
+              </select>
+            </div>
+
+            <div class="form-field full">
+              <label for="f-msg">Any Extra Details? (optional)</label>
+              <textarea id="f-msg" placeholder="Describe the problem, AC brand, number of units, preferred time, etc."></textarea>
+            </div>
+
+          </div>
+
+          <!-- ✏️ Change button text if needed -->
+          <button class="btn" style="margin-top:20px;width:100%;justify-content:center;font-size:16px;padding:16px" onclick="sendForm()">
+            📩 Send Booking Request
+          </button>
+
+          <!-- ✏️ Change the success message text -->
+          <div class="form-success" id="form-success">
+            ✅ Request received! We'll call you back within 1 hour.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       FOOTER
+       ✏️ Update links, description, socials
+       ============================================= -->
+  <footer>
+    <div class="footer-inner">
+
+      <!-- Brand column -->
+      <div>
+        <div class="footer-logo">
+          <div class="logo-icon">❄️</div>
+          OnCall AC Services
+        </div>
+        <!-- ✏️ Change the footer description -->
+        <p class="footer-desc">
+          Accra's trusted air conditioning team. Installation, repair, and
+          maintenance — call us any time, 7 days a week.
+        </p>
+        <!-- ✏️ Add your social media links below -->
+        <div class="footer-socials" style="margin-top:20px">
+          <a href="#" title="Facebook">📘</a>
+          <a href="#" title="Instagram">📷</a>
+          <a href="#" title="WhatsApp">💬</a>
+          <a href="#" title="Twitter/X">🐦</a>
+        </div>
+      </div>
+
+      <!-- Services column -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <!-- ✏️ Match these to your actual services above -->
+        <ul>
+          <li><a href="#services">AC Repair</a></li>
+          <li><a href="#services">AC Installation</a></li>
+          <li><a href="#services">Servicing & Cleaning</a></li>
+          <li><a href="#services">Gas Recharge</a></li>
+          <li><a href="#services">Commercial AC</a></li>
+          <li><a href="#services">Emergency Call-Out</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick links column -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#why-us">Why Choose Us</a></li>
+          <li><a href="#gallery">Our Work</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Book a Job</a></li>
+          <!-- ✏️ Add a privacy policy or terms page link here if needed -->
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <!-- ✏️ Change the copyright name and year -->
+      <p>© <span id="yr"></span> OnCall AC Services, Wristberg Rd, Accra. All rights reserved.</p>
+      <p style="opacity:.4;font-size:13px">Made with ❤️ for Accra</p>
+    </div>
+  </footer>
+
+
+  <!-- =============================================
+       JAVASCRIPT — no need to edit this
+       ============================================= -->
+  <script>
+
+    // Auto-fill current year in footer
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+
+    // Close mobile nav when a link is clicked
+    document.querySelectorAll('#nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+
+    // Fade-up animation on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Contact form submit
+    function sendForm() {
+      const name  = document.getElementById('f-name').value.trim();
+      const phone = document.getElementById('f-phone').value.trim();
+      if (!name || !phone) {
+        alert('Please enter your name and phone number so we can call you back.');
+        return;
+      }
+      // ✏️ TO RECEIVE REAL EMAILS:
+      // Replace this block with a real form service.
+      // Easy option — Formspree (free):
+      //   1. Go to formspree.io and create a free account
+      //   2. Create a form and get your form ID (looks like "xrgjabc")
+      //   3. Replace the alert below with:
+      //      fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      //        method: 'POST',
+      //        headers: { 'Content-Type': 'application/json' },
+      //        body: JSON.stringify({ name, phone, message: document.getElementById('f-msg').value })
+      //      }).then(() => showSuccess());
+      showSuccess();
+    }
+
+    function showSuccess() {
+      document.getElementById('form-success').style.display = 'block';
+      document.querySelectorAll('.form-grid input, .form-grid textarea, .form-grid select')
+        .forEach(el => el.value = '');
+    }
+
+  </script>
+
+</body>
+</html>
